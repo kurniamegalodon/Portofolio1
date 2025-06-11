@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio Hacker Style</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body, html {
+      height: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #e0e0e0;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+      background: url('https://images.unsplash.com/photo-1537432376769-00b7178eae11?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
+    }
+    /* overlay for better readability */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 10, 30, 0.8);
+      z-index: -1;
+    }
+
+    a {
+      color: #4caf50;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    a:hover {
+      color: #81c784;
+    }
+
+    header {
+      background: rgba(0,0,0,0.7);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 0 15px #4caf5066;
+    }
+    nav {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+      color: #c8e6c9;
+    }
+    .logo {
+      font-weight: 900;
+      font-size: 1.9rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      user-select: none;
+      color: #81c784;
+      text-shadow: 0 0 8px #4caf50aa;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.7rem;
+    }
+    .nav-links a {
+      font-weight: 600;
+      padding-bottom: 0.3rem;
+      border-bottom: 2px solid transparent;
+      color: #c8e6c9;
+      text-shadow: 0 0 6px #2e7d32bb;
+      transition: border-color 0.3s, color 0.3s;
+    }
+    .nav-links a.active,
+    .nav-links a:hover {
+      border-color: #4caf50;
+      color: #4caf50;
+      text-shadow: 0 0 10px #4caf50ee;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 3rem auto 5rem;
+      background: rgba(0,0,0,0.7);
+      padding: 2.5rem 3rem;
+      border-radius: 18px;
+      box-shadow: 0 12px 40px #4caf5066;
+      color: #e0e0e0;
+      user-select: text;
+    }
+    section {
+      margin-bottom: 3.5rem;
+    }
+    section h2 {
+      font-size: 2.2rem;
+      font-weight: 900;
+      border-left: 7px solid #4caf50;
+      padding-left: 14px;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 0 8px #4caf50cc;
+      user-select: none;
+    }
+    #profile img {
+      float: right;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      box-shadow: 0 0 18px #4caf50bb;
+      object-fit: cover;
+      margin-left: 2rem;
+      filter: drop-shadow(0 0 6px #4caf50cc);
+      transition: transform 0.3s ease;
+      cursor: default;
+    }
+    #profile img:hover {
+      transform: scale(1.05);
+    }
+    #profile p {
+      max-width: 700px;
+      font-size: 1.2rem;
+      color: #c8e6c9;
+      line-height: 1.7;
+    }
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    li {
+      background: rgba(72, 128, 67, 0.6);
+      border-radius: 12px;
+      padding: 1.3rem 1.8rem;
+      margin-bottom: 1.4rem;
+      box-shadow: inset 0 0 12px #81c784cc;
+      transition: background-color 0.3s ease;
+      user-select: text;
+    }
+    li:hover {
+      background: rgba(129, 199, 132, 0.75);
+      box-shadow: 0 0 22px #4caf50aa;
+    }
+    li strong {
+      color: #a5d6a7;
+      display: block;
+      font-size: 1.25rem;
+      margin-bottom: 0.3rem;
+    }
+    .project-links a {
+      display: inline-block;
+      margin-right: 1rem;
+      margin-top: 0.3rem;
+      font-size: 1rem;
+      background: #4caf50;
+      color: #121d10;
+      font-weight: 700;
+      padding: 0.4rem 0.9rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px #4caf5080;
+      text-decoration: none;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .project-links a:hover {
+      background-color: #81c784;
+      color: #121d10;
+      box-shadow: 0 6px 18px #81c784cc;
+    }
+
+    /* Skill section */
+    .skills-container {
+      display: flex;
+      gap: 2.8rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .skill-card {
+      flex: 1 1 160px;
+      max-width: 230px;
+      background: rgba(72, 128, 67, 0.6);
+      border-radius: 18px;
+      padding: 1.3rem 1.7rem;
+      text-align: center;
+      box-shadow: 0 7px 18px #4caf5066;
+      user-select: none;
+      transition: transform 0.3s;
+      cursor: default;
+    }
+    .skill-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 28px #81c784cc;
+    }
+    .skill-icon {
+      width: 72px;
+      height: 72px;
+      margin-bottom: 1rem;
+      filter: drop-shadow(0 0 10px #4caf50bb);
+    }
+    .skill-name {
+      font-weight: 900;
+      font-size: 1.4rem;
+      color: #d0f0c0;
+      margin-bottom: 0.7rem;
+      text-shadow: 0 0 6px #81c784cc;
+    }
+    .skill-bar {
+      background: #335a1a88;
+      border-radius: 14px;
+      height: 14px;
+      overflow: hidden;
+      user-select: none;
+      box-shadow: inset 0 2px 6px #81c784aa;
+    }
+    .skill-level {
+      height: 14px;
+      background: #a5d6a7;
+      border-radius: 14px 0 0 14px;
+      box-shadow: 0 0 8px #a5d6a7cc;
+      transition: width 0.7s ease;
+    }
+
+    /* Hobi styling */
+    #hobbies ul li {
+      font-weight: 700;
+      background: rgba(72, 128, 67, 0.55);
+      color: #c8e6c9;
+      padding: 1rem 1.3rem;
+      border-radius: 14px;
+      margin-bottom: 1rem;
+      box-shadow: inset 0 0 10px #4caf5080;
+      user-select: text;
+      transition: background-color 0.3s;
+    }
+    #hobbies ul li:hover {
+      background: #81c784aa;
+      box-shadow: 0 0 18px #4caf50cc;
+    }
+
+    /* Contact form */
+    form {
+      max-width: 600px;
+      margin-top: 1.2rem;
+      user-select: text;
+    }
+    form label {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-weight: 700;
+      color: #a5d6a7;
+      text-shadow: 0 0 5px #81c784cc;
+    }
+    form input,
+    form textarea {
+      width: 100%;
+      padding: 0.7rem 1.1rem;
+      margin-bottom: 1.45rem;
+      border-radius: 14px;
+      border: 2px solid #81c784;
+      font-size: 1.1rem;
+      outline: none;
+      font-family: inherit;
+      transition: border-color 0.4s ease;
+      resize: vertical;
+      background: #213d0f;
+      color: #c8e6c9;
+      box-shadow: inset 0 0 6px #4caf5080;
+    }
+    form input:focus,
+    form textarea:focus {
+      border-color: #c8e6c9;
+      background: #2b4e12;
+      box-shadow: 0 0 15px #a5d6a7cc;
+      color: #e0e0e0;
+    }
+    form input[type="submit"] {
+      background: #4caf50;
+      color: #121d10;
+      font-weight: 900;
+      border: none;
+      cursor: pointer;
+      border-radius: 24px;
+      padding: 0.8rem 2rem;
+      font-size: 1.2rem;
+      box-shadow: 0 10px 24px #4caf50dd;
+      transition: background-color 0.35s ease;
+      user-select: none;
+    }
+    form input[type="submit"]:hover {
+      background: #81c784;
+      box-shadow: 0 12px 28px #81c784ee;
+      color: #121d10;
+    }
+
+    /* Contact info links */
+    #contact p a {
+      font-weight: 700;
+      color: #81c784;
+      user-select: text;
+      transition: color 0.3s ease;
+    }
+    #contact p a:hover {
+      color: #c8e6c9;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 1.8rem 0;
+      font-weight: 700;
+      color: #4caf5088;
+      user-select: none;
+      background: rgba(0,0,0,0.7);
+      box-shadow: inset 0 10px 15px black;
+      margin-top: auto;
+      font-size: 0.95rem;
+      letter-spacing: 0.3em;
+    }
+
+    /* Responsive */
+    @media (max-width: 680px) {
+      nav {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      #profile img {
+        float: none;
+        margin: 0 auto 1rem;
+        width: 120px;
+        height: 120px;
+        display: block;
+      }
+      main {
+        margin: 2rem 1.2rem 3rem;
+        padding: 1.8rem 1.8rem;
+      }
+      section h2 {
+        font-size: 1.9rem;
+      }
+      .skills-container {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">PORTOFOLIO</div>
+      <div class="nav-links">
+        <a href="#profile" class="active">Profil</a>
+        <a href="#education">Pendidikan</a>
+        <a href="#projects">Proyek</a>
+        <a href="#skills">Skill</a>
+        <a href="#hobbies">Hobi</a>
+        <a href="#contact">Kontak</a>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <section id="profile">
+      <h2>Profil</h2>
+      <img src="rizki.png" alt="Foto Profil" />
+      <p>
+        Hai! Saya seorang pengembang web dengan minat kuat dalam keamanan siber dan coding. Saya berpengalaman dalam HTML, CSS, dan JavaScript, serta selalu ingin belajar hal baru untuk memperkuat skill saya.
+      </p>
+    </section>
+    <section id="education">
+      <h2>Pendidikan</h2>
+      <ul>
+        <li><strong>Sarjana Teknik Informatika - Universitas Indonesia (2016 - 2020)</strong><br />Fokus pada pengembangan perangkat lunak dan keamanan jaringan.</li>
+        <li><strong>SMA Negeri 1 Jakarta (2013 - 2016)</strong><br />Jurusan IPA, aktif dalam ekstrakurikuler komputer dan pemrograman.</li>
+      </ul>
+    </section>
+    <section id="projects">
+      <h2>Proyek</h2>
+      <ul>
+        <li>
+          <strong>Website E-Commerce</strong>
+          <p>Membangun website toko online lengkap dengan fitur pembayaran dan manajemen produk menggunakan HTML, CSS, dan JavaScript.</p>
+          <div class="project-links">
+            <a href="https://github.com/username/ecommerce" target="_blank" rel="noopener noreferrer" >GitHub</a>
+            <a href="#" target="_blank" rel="noopener noreferrer">Demo</a>
+          </div>
+        </li>
+        <li>
+          <strong>Aplikasi To-Do List</strong>
+          <p>Aplikasi manajemen task sederhana berbasis web dengan notifikasi pengingat.</p>
+          <div class="project-links">
+            <a href="https://github.com/username/todolist" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="#" target="_blank" rel="noopener noreferrer">Demo</a>
+          </div>
+        </li>
+      </ul>
+    </section>
+    <section id="skills">
+      <h2>Skill</h2>
+      <div class="skills-container">
+        <div class="skill-card" title="HTML5">
+          <img src="https://cdn-icons-png.flaticon.com/512/732/732212.png" alt="HTML5" class="skill-icon" />
+          <div class="skill-name">HTML5</div>
+          <div class="skill-bar"><div class="skill-level" style="width: 95%;"></div></div>
+        </div>
+        <div class="skill-card" title="CSS3">
+          <img src="https://cdn-icons-png.flaticon.com/512/732/732190.png" alt="CSS3" class="skill-icon" />
+          <div class="skill-name">CSS3</div>
+          <div class="skill-bar"><div class="skill-level" style="width: 90%;"></div></div>
+        </div>
+        <div class="skill-card" title="JavaScript">
+          <img src="https://cdn-icons-png.flaticon.com/512/5968/5968292.png" alt="JavaScript" class="skill-icon" />
+          <div class="skill-name">JavaScript</div>
+          <div class="skill-bar"><div class="skill-level" style="width: 85%;"></div></div>
+        </div>
+      </div>
+    </section>
+    <section id="hobbies">
+      <h2>Hobi</h2>
+      <ul>
+        <li>Fotografi - Menangkap momen unik dengan fokus pada suasana malam dan cahaya rendah.</li>
+        <li>Traveling - Menjelajah dunia dengan perspektif open-source dan kebudayaan hacker.</li>
+        <li>Membaca buku keamanan komputer dan teknologi terbaru.</li>
+        <li>Bermain gitar dan menciptakan musik elektronik.</li>
+      </ul>
+    </section>
+    <section id="contact">
+      <h2>Kontak</h2>
+      <p>Silakan hubungi saya melalui form berikut atau lewat email serta media sosial di bawah ini.</p>
+      <form id="contactForm">
+        <label for="name">Nama</label>
+        <input type="text" id="name" name="name" placeholder="Nama Anda" required />
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Email Anda" required />
+        <label for="message">Pesan</label>
+        <textarea id="message" name="message" rows="5" placeholder="Tulis pesan Anda di sini..." required></textarea>
+        <input type="submit" value="Kirim" />
+      </form>
+      <p style="margin-top:1rem; color:#81c784; font-weight: 700;">
+        Email: <a href="mailto:youremail@example.com">youremail@example.com</a><br />
+        LinkedIn: <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer">linkedin.com/in/yourprofile</a><br />
+        GitHub: <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer">github.com/yourusername</a>
+      </p>
+      <div id="formResponse" style="margin-top:1rem; color:#4caf50; font-weight:bold;"></div>
+    </section>
+  </main>
+  <footer>&copy; 2024 Your Name. All Rights Reserved.</footer>
+
+  <script>
+    // Navigation active link on scroll
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    function setActiveLink() {
+      let index = sections.length;
+
+      while (--index && window.scrollY + 130 < sections[index].offsetTop) {}
+      navLinks.forEach(link => link.classList.remove('active'));
+      navLinks[index].classList.add('active');
+    }
+    setActiveLink();
+    window.addEventListener('scroll', setActiveLink);
+
+    // Contact form submission simulation
+    const form = document.getElementById('contactForm');
+    const responseDiv = document.getElementById('formResponse');
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      responseDiv.textContent = 'Pesan berhasil dikirim! Terima kasih sudah menghubungi saya.';
+      form.reset();
+      setTimeout(() => {
+        responseDiv.textContent = '';
+      }, 6000);
+    });
+  </script>
+</body>
+</html>
